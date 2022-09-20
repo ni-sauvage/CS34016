@@ -73,4 +73,31 @@ HINT: Don't worry about code efficiency
 
 -}
 runs :: Eq a => [a] -> [[a]]
-runs = undefined
+runs [] = []
+runs [x] = [[x]]
+runs x = mergeListOfLists (singletonElem x)
+
+singletonElem :: Eq a => [a] -> [[a]]
+singletonElem [] = []
+singletonElem (x:xs) = [x]:singletonElem xs
+
+mergeListOfLists :: Eq a => [[a]] -> [[a]]
+mergeListOfLists [] = []
+mergeListOfLists (x:xs) | null xs = [x]
+                        | head x == head (head xs) = [x ++ merge' xs] ++ mergeListOfLists (iterate' xs)
+                        | otherwise = x:mergeListOfLists xs
+
+iterate' :: Eq a => [[a]] -> [[a]]
+iterate' [] = []
+iterate' [[x]] = []
+iterate' (x:xs) | head x /= head (head xs) = xs
+                | otherwise = iterate' xs
+
+merge' :: Eq a => [[a]] -> [a]
+merge' [] = []
+merge' [[x]] = [x]
+merge' (x:xs) | head x == head (head xs) = x ++ head xs
+              | otherwise = x
+
+
+
