@@ -27,7 +27,7 @@ It is imported should you want to use it.
 -}
 lower :: String -> String
 lower [] = ""
-lower (x:xs) = toLower x
+lower (x:xs) = (toLower x) : (lower xs)
 
 
 {- Part 2
@@ -37,7 +37,11 @@ Hint: the test will answer your Qs
 
 -}
 nth :: Int -> [a] -> a
-nth = undefined
+nth n x = nth' 1 n x
+
+nth' :: Int -> Int -> [a] -> a
+nth' n1 n2 (x:xs) | n1 == n2 = x
+                  | otherwise = nth' (n1+1) n2 xs
 
 {- Part 3
 
@@ -46,7 +50,10 @@ and returns the prefix they have in common.
 
 -}
 commonPfx :: Eq a => [a] -> [a] -> [a]
-commonPfx = undefined
+commonPfx [] _ = []
+commonPfx _ [] = []
+commonPfx (x:xs) (y:ys) | x == y = x : commonPfx xs ys
+                        | otherwise = []
 
 {- Part 4
 
