@@ -29,12 +29,12 @@ version :: Version
 version = Version [0,1,0,0] []
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
 
-bindir     = "/home/sauvagen/TR033/CS34016/Exercise01/.stack-work/install/x86_64-linux-tinfo6/3c68f6377a3187d2f8c1475b9b6fab501756f8d123a6e1be6d551a7060561537/8.10.7/bin"
-libdir     = "/home/sauvagen/TR033/CS34016/Exercise01/.stack-work/install/x86_64-linux-tinfo6/3c68f6377a3187d2f8c1475b9b6fab501756f8d123a6e1be6d551a7060561537/8.10.7/lib/x86_64-linux-ghc-8.10.7/ex01-0.1.0.0-Jh6CAE5jwzPDgzucnfVIFK-Main"
-dynlibdir  = "/home/sauvagen/TR033/CS34016/Exercise01/.stack-work/install/x86_64-linux-tinfo6/3c68f6377a3187d2f8c1475b9b6fab501756f8d123a6e1be6d551a7060561537/8.10.7/lib/x86_64-linux-ghc-8.10.7"
-datadir    = "/home/sauvagen/TR033/CS34016/Exercise01/.stack-work/install/x86_64-linux-tinfo6/3c68f6377a3187d2f8c1475b9b6fab501756f8d123a6e1be6d551a7060561537/8.10.7/share/x86_64-linux-ghc-8.10.7/ex01-0.1.0.0"
-libexecdir = "/home/sauvagen/TR033/CS34016/Exercise01/.stack-work/install/x86_64-linux-tinfo6/3c68f6377a3187d2f8c1475b9b6fab501756f8d123a6e1be6d551a7060561537/8.10.7/libexec/x86_64-linux-ghc-8.10.7/ex01-0.1.0.0"
-sysconfdir = "/home/sauvagen/TR033/CS34016/Exercise01/.stack-work/install/x86_64-linux-tinfo6/3c68f6377a3187d2f8c1475b9b6fab501756f8d123a6e1be6d551a7060561537/8.10.7/etc"
+bindir     = "/home/sauvagen/CS34016/Exercise01/.stack-work/install/x86_64-linux-tinfo6/3c68f6377a3187d2f8c1475b9b6fab501756f8d123a6e1be6d551a7060561537/8.10.7/bin"
+libdir     = "/home/sauvagen/CS34016/Exercise01/.stack-work/install/x86_64-linux-tinfo6/3c68f6377a3187d2f8c1475b9b6fab501756f8d123a6e1be6d551a7060561537/8.10.7/lib/x86_64-linux-ghc-8.10.7/ex01-0.1.0.0-Jh6CAE5jwzPDgzucnfVIFK-Main"
+dynlibdir  = "/home/sauvagen/CS34016/Exercise01/.stack-work/install/x86_64-linux-tinfo6/3c68f6377a3187d2f8c1475b9b6fab501756f8d123a6e1be6d551a7060561537/8.10.7/lib/x86_64-linux-ghc-8.10.7"
+datadir    = "/home/sauvagen/CS34016/Exercise01/.stack-work/install/x86_64-linux-tinfo6/3c68f6377a3187d2f8c1475b9b6fab501756f8d123a6e1be6d551a7060561537/8.10.7/share/x86_64-linux-ghc-8.10.7/ex01-0.1.0.0"
+libexecdir = "/home/sauvagen/CS34016/Exercise01/.stack-work/install/x86_64-linux-tinfo6/3c68f6377a3187d2f8c1475b9b6fab501756f8d123a6e1be6d551a7060561537/8.10.7/libexec/x86_64-linux-ghc-8.10.7/ex01-0.1.0.0"
+sysconfdir = "/home/sauvagen/CS34016/Exercise01/.stack-work/install/x86_64-linux-tinfo6/3c68f6377a3187d2f8c1475b9b6fab501756f8d123a6e1be6d551a7060561537/8.10.7/etc"
 
 getBinDir, getLibDir, getDynLibDir, getDataDir, getLibexecDir, getSysconfDir :: IO FilePath
 getBinDir = catchIO (getEnv "ex01_bindir") (\_ -> return bindir)
