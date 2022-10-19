@@ -90,8 +90,11 @@ eval d (Dvd x y) =
     (_, Left y) -> Left y
     (_, Right 0.0) -> Left "div by zero"
     (Right x, Right y) -> Right (x / y)
-
-
+eval d (Def x e1 e2) = 
+  let y = (eval d e1)
+  in case y of 
+    (Left msg) -> Left msg
+    (Right doub) -> eval (define d x doub) e2
 
 -- Part 2 : Expression Laws -- (15 test marks, worth 15 Exercise Marks) --------
 
