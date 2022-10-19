@@ -1,5 +1,7 @@
 {- butrfeld Andrew Butterfield -}
 module Ex02 where
+import Control.Arrow (ArrowChoice(right))
+import Data.Either
 
 name, idno, username :: String
 name      =  "Sauvage, Niall"  -- replace with your name
@@ -57,7 +59,39 @@ v42 = Val 42 ; j42 = Just v42
   -- see test outcomes for the precise format of those messages
 
 eval :: EDict -> Expr -> Either String Double
-eval d e = error "eval NYI"
+eval _ (Val v) = Right v
+eval d (Var y) = find d y
+eval d (Add x y) = 
+  let e1 = eval d x 
+      e2 = eval d y
+  in case (e1, e2) of 
+    (Left x, _) -> Left x
+    (_, Left y) -> Left y
+    (Right x, Right y) -> Right (x + y)
+eval d (Sub x y) = 
+  let e1 = eval d x 
+      e2 = eval d y
+  in case (e1, e2) of 
+    (Left x, _) -> Left x
+    (_, Left y) -> Left y
+    (Right x, Right y) -> Right (x - y)
+eval d (Mul x y) = 
+  let e1 = eval d x 
+      e2 = eval d y
+  in case (e1, e2) of 
+    (Left x, _) -> Left x
+    (_, Left y) -> Left y
+    (Right x, Right y) -> Right (x * y)
+eval d (Dvd x y) = 
+  let e1 = eval d x 
+      e2 = eval d y
+  in case (e1, e2) of 
+    (Left x, _) -> Left x
+    (_, Left y) -> Left y
+    (_, Right 0.0) -> Left "div by zero"
+    (Right x, Right y) -> Right (x / y)
+
+
 
 -- Part 2 : Expression Laws -- (15 test marks, worth 15 Exercise Marks) --------
 
@@ -83,16 +117,24 @@ There are many, many laws of algebra that apply to our expressions, e.g.,
 
 -- x * y            =   y * z        Law 1
 law1 :: Expr -> Maybe Expr
-law1 e = error "law1 NYI"
+law1 (Mul x y) = Just (Mul y x)
+law1 _ = Nothing
 
 -- (x + y) + z      =   x + (y + z)  Law 2
 law2 :: Expr -> Maybe Expr
-law2 e = error "law2 NYI"
+law2 (Add (Add x y) z) = Just $ Add x (Add y z)
+law2 _ = Nothing
 
 -- (x / y) / z      =   x / (y * z)  Law 3
 law3 :: Expr -> Maybe Expr
-law3 e = error "law3 NYI"
+law3 (Dvd (Dvd x y) z) = Just $ Dvd x (Mul y z)
+law3 _ = Nothing
 
 -- (x + y)*(x - y)  =  x*x - y*y     Law 4
 law4 :: Expr -> Maybe Expr
-law4 e = error "law4 NYI"
+law4 (Mul (Add x y) (Sub z w)) 
+  = Just $ Sub (Mul x x) (Mul y y)
+  where
+    z = x
+    w = y
+law4 _ = Nothing
