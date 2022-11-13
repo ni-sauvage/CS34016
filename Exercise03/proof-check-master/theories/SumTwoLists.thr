@@ -9,8 +9,23 @@ THEOREM sum_lists
 
     sum ((42:[])++(99:[]))  ==  sum (42:99:[]) + sum []
 
-STRATEGY ReduceAll
+STRATEGY ReduceBoth
 
-    sum ((42:[])++(99:[]))  ==  sum (42:99:[]) + sum []
+    LHS
+        sum ((42:[])++(99:[]))
+         = DEF ++.2
+        sum (42:([] ++ (99:[])))
+         = DEF ++.1
+        sum (42:(99:[]))
+    
+    RHS
+        sum (42:99:[]) + sum []
+         = LAW add_symm r2l
+        sum [] + sum (42:99:[])
+         = DEF sum.1
+        0 + sum (42:99:[])
+         = LAW add_left_unit l2r
+        sum (42:(99:[]))
+        
 
 QED sum_lists
