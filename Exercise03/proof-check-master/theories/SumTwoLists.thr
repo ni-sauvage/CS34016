@@ -17,7 +17,15 @@ STRATEGY ReduceBoth
         sum (42:([] ++ (99:[])))
          = DEF ++.1
         sum (42:(99:[]))
-    
+         = DEF sum.2
+        42 + sum (99:[])
+         = DEF sum.2
+        42 + (99 + sum [])
+         = DEF sum.1
+        42 + (99 + 0)
+         = SIMP
+        141
+        
     RHS
         sum (42:99:[]) + sum []
          = LAW add_symm r2l
@@ -26,6 +34,13 @@ STRATEGY ReduceBoth
         0 + sum (42:99:[])
          = LAW add_left_unit l2r
         sum (42:(99:[]))
+         = DEF sum.2
+        42 + sum (99:[])
+         = DEF sum.2
+        42 + (99 + sum [])
+         = DEF sum.1
+        42 + (99 + 0)
+         = SIMP
+        141
         
-
 QED sum_lists
