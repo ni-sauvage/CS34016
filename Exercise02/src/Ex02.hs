@@ -61,40 +61,27 @@ v42 = Val 42 ; j42 = Just v42
 eval :: EDict -> Expr -> Either String Double
 eval _ (Val v) = Right v
 eval d (Var y) = find d y
-eval d (Add x y) = 
-  let e1 = eval d x 
-      e2 = eval d y
-  in case (e1, e2) of 
-    (Left x, _) -> Left x
-    (_, Left y) -> Left y
-    (Right x, Right y) -> Right (x + y)
-eval d (Sub x y) = 
-  let e1 = eval d x 
-      e2 = eval d y
-  in case (e1, e2) of 
-    (Left x, _) -> Left x
-    (_, Left y) -> Left y
-    (Right x, Right y) -> Right (x - y)
-eval d (Mul x y) = 
-  let e1 = eval d x 
-      e2 = eval d y
-  in case (e1, e2) of 
-    (Left x, _) -> Left x
-    (_, Left y) -> Left y
-    (Right x, Right y) -> Right (x * y)
-eval d (Dvd x y) = 
-  let e1 = eval d x 
-      e2 = eval d y
-  in case (e1, e2) of 
-    (Left x, _) -> Left x
-    (_, Left y) -> Left y
-    (_, Right 0.0) -> Left "div by zero"
-    (Right x, Right y) -> Right (x / y)
+eval d (Add x y) = evalOp (+) (eval d x) (eval d y)
+eval d (Sub x y) = evalOp (-) (eval d x) (eval d y)
+eval d (Mul x y) = evalOp (*) (eval d x) (eval d y)
+eval d (Dvd x y) =
+  let 
+    denom = eval d y
+    numer = eval d x
+  in case denom of 
+    Right 0 -> Left "div by zero"
+    _ -> evalOp (/) numer denom
 eval d (Def x e1 e2) = 
   let y = eval d e1
   in case y of 
     (Left msg) -> Left msg
     (Right doub) -> eval (define d x doub) e2
+
+evalOp op e1 e2 = 
+  case (e1, e2) of 
+    (Left x, _) -> Left x
+    (_, Left y) -> Left y
+    (Right x, Right y) -> Right $ x `op` y 
 
 -- Part 2 : Expression Laws -- (15 test marks, worth 15 Exercise Marks) --------
 
