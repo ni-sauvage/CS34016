@@ -1,0 +1,4 @@
+I love haskell
+It is certainly functional
+I hate prolog
+It is symbolic of my failures
