@@ -23,3 +23,6 @@ This assignment involved expression parsing and evaluation using Haskell, as wel
 
 ### [Exercise03](https://github.com/ni-sauvage/CS34016/blob/master/Exercise03/proof-check-master/Exercise03.md)
 Finally, this assignment was showcasing the potential of Haskell - within a [Domain Specific Language](https://en.wikipedia.org/wiki/Domain-specific_language), in this case a theorem prover, we were asked to show simple arithmetic tautologies such that the DLS could prove them. 
+
+### [Exam Practice](https://cs-exams.com/docs/introduction-to-functional-programming)
+These are my solutions to past papers, done mostly in December 2022 in order to prepare for the annual exams. 
